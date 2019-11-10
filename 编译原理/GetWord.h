@@ -40,7 +40,7 @@ enum symType {
 //简单的恢复方法是忽略该字符（或单词）重新开始扫描。
 string words[words_num];//保留字表,由于该C语言小子集的保留字只有6个，故而线性查找比二分查找更快,不需要按照字典序排列
 symType wsym[words_num];//保留字的种别,用于说明保留字的类型
-
+string nowline;
 //标识符表的类
 struct identsheetTemplate {
 public:
@@ -48,7 +48,7 @@ public:
 	int number;
 	string type;
 	int adress;
-	
+
 };
 identsheetTemplate identsheet[100];//标识符的表，用于存放标识符的编号,类型和地址
 int row;//全局变量,存储当前读取字符所在的行
@@ -59,6 +59,8 @@ char ch;//用于单个字符读取的变量
 int Num_of_idents;//当前读取的标识符的数量
 string word;//单个字符汇集成的单词
 void output() {
+	if (word.empty())
+		return;
 	int value = -1;
 	//当前的单词为标识符
 	if (sym == ident) {
@@ -104,6 +106,9 @@ bool Is_Number(char ch) {
 
 //从待编译的程序中获得一个单词
 void getword(ifstream& fread) {
+	output();
+	nowline.append(word);
+	nowline.append(" ");
 	word.clear();//先清空当前的单词
 	//如果ch还没赋值,则取一个字符
 	if (!ch) {
@@ -114,9 +119,13 @@ void getword(ifstream& fread) {
 		ch = fread.get();
 	}
 	//读到一个换行符,row增加
-	if (ch == '\n') {
+	while(ch == '\n') {
+		nowline.clear();
 		row++;
 		ch = fread.get();//再读一个字符
+	}
+	while (ch == ' ') {
+		ch = fread.get();
 	}
 	//读取的是一个小写字母
 	if (Is_lowerLetter(ch)) {
@@ -168,11 +177,9 @@ void getword(ifstream& fread) {
 				sym = number;
 				return;
 			}
-			//非法
-			else {
-				cout << '\a' << "unsupport identifier at row:" << row << endl;
-				cout << "ignore: " << ch << endl;
-				ch = fread.get();
+			else {// + - * / 
+				sym = number;
+				return;
 			}
 			ch = fread.get();
 		}
