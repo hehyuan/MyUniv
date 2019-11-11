@@ -114,18 +114,13 @@ void getword(ifstream& fread) {
 	if (!ch) {
 		ch = fread.get();
 	}
-	//去掉空格
-	while (ch == ' ') {
+	//去掉空格 换行
+	while (ch == ' '||ch=='\n') {
 		ch = fread.get();
-	}
-	//读到一个换行符,row增加
-	while(ch == '\n') {
-		nowline.clear();
-		row++;
-		ch = fread.get();//再读一个字符
-	}
-	while (ch == ' ') {
-		ch = fread.get();
+		if (ch == '\n') {
+			nowline.clear();
+			row++;
+		}
 	}
 	//读取的是一个小写字母
 	if (Is_lowerLetter(ch)) {

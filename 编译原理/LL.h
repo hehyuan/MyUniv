@@ -17,6 +17,10 @@ void error() {
 	cout << "Error!" << endl;
 	cout << nowline << "^" << word << "\t At row: " << row << endl;
 }
+void error(string e) {
+	cout << "Error:" << e << endl;
+	cout << nowline << "^" << word << "\t At row: " << row << endl;
+}
 //定义开始
 
 // <程序> ::= main(){<主函数>}
