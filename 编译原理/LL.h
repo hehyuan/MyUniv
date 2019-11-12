@@ -10,9 +10,23 @@ using namespace std;
 
 //枚举可能出现的语法错误
 enum errorType {
-	
+	variableDiscribeError,
+	fenhaoError,
+	kuohaoError,
+	keyWordError,
+	assumeError,
+	ifError,
+	whileError,
 };
-string errorString[3] = { "可能缺少必要的括号!"};
+string errorString[] = {
+	"变量说明错误,应该是int型",
+	"缺少;",
+	"括号不全!",
+	"关键词错误!",
+	"不是正确的赋值语句!",
+	"缺少else!",
+	"缺少do!",
+};
 void error() {	
 	cout << "Error!" << endl;
 	cout << nowline << "^" << word << "\t At row: " << row << endl;
@@ -96,15 +110,15 @@ inline void program(ifstream& fread) {
 						getword(fread);
 						return;
 					}
-					else error();
+					else error(errorString[kuohaoError]);
 				}
-				else error();
+				else error(errorString[kuohaoError]);
 			}
-			else error();
+			else error(errorString[kuohaoError]);
 		}
-		else error();
+		else error(errorString[kuohaoError]);
 	}
-	else error();
+	else error(errorString[keyWordError]);
 }
 
 inline void mainFunction(ifstream& fread) {
@@ -116,7 +130,7 @@ inline void mainFunction(ifstream& fread) {
 		cout << "归约到<主函数>" << endl;
 	}
 	else {
-		error();
+		error(errorString[fenhaoError]);
 	}
 }
 
@@ -133,7 +147,7 @@ inline void variableDiscribe(ifstream& fread) {
 		getword(fread);
 		cout << "归约到<变量说明>" << endl;
 	}
-	else error();
+	else error(errorString[variableDiscribeError]);
 }
 
 inline void identSheet(ifstream& fread) {
@@ -181,7 +195,11 @@ inline void sentencePart1(ifstream& fread)
 		sentence(fread);
 		sentencePart1(fread);
 		cout << "归约到<语句部分1>" << endl;
-	}else cout << "归约到<语句部分1>" << endl;
+	}
+	else if (word != "}") {
+		error(errorString[fenhaoError]);
+	}
+	else cout << "归约到<语句部分1>" << endl;
 }
 
 inline void sentence(ifstream& fread)
@@ -200,6 +218,7 @@ inline void sentence(ifstream& fread)
 		loopSentence(fread);
 		cout << "归约到<语句>" << endl;
 	}
+	else error();
 }
 
 inline void assumeSentence(ifstream& fread)
@@ -211,7 +230,7 @@ inline void assumeSentence(ifstream& fread)
 		expression(fread);
 		cout << "归约到<赋值语句>" << endl;
 	}
-	else error();
+	else error(errorString[assumeError]);
 }
 
 inline void condition(ifstream& fread)
@@ -312,9 +331,9 @@ inline void factor(ifstream& fread)
 			getword(fread);
 			cout << "归约到<因子>" << endl;
 		}
-		else error();
+		else error(errorString[kuohaoError]);
 	}
-	else error();
+	else error(errorString[kuohaoError]);
 }
 
 inline void constVal(ifstream& fread)
@@ -335,9 +354,9 @@ inline void complexSentence(ifstream& fread)
 			getword(fread);
 			cout << "归约到<复合语句>" << endl;
 		}
-		else error();
+		else error(errorString[kuohaoError]);
 	}
-	else error();
+	else error(errorString[kuohaoError]);
 }
 
 inline void sentence1(ifstream& fread)
@@ -366,13 +385,13 @@ inline void conditionSentence(ifstream& fread)
 					sentence1(fread);
 					cout << "归约到<条件语句>" << endl;
 				}
-				else error();
+				else error(errorString[ifError]);
 			}
-			else error();
+			else error(errorString[kuohaoError]);
 		}
-		else error();
+		else error(errorString[kuohaoError]);
 	}
-	else error();
+	else error(errorString[keyWordError]);
 }
 
 inline void loopSentence(ifstream& fread)
@@ -389,13 +408,13 @@ inline void loopSentence(ifstream& fread)
 					sentence1(fread);
 					cout << "归约到<循环语句>" << endl;
 				}
-				else error();
+				else error(errorString[whileError]);
 			}
-			else error();
+			else error(errorString[kuohaoError]);
 		}
-		else error();
+		else error(errorString[kuohaoError]);
 	}
-	else error();
+	else error(errorString[keyWordError]);
 }
 
 

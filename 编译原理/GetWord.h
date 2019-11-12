@@ -116,11 +116,11 @@ void getword(ifstream& fread) {
 	}
 	//去掉空格 换行
 	while (ch == ' '||ch=='\n') {
-		ch = fread.get();
 		if (ch == '\n') {
 			nowline.clear();
 			row++;
 		}
+		ch = fread.get();
 	}
 	//读取的是一个小写字母
 	if (Is_lowerLetter(ch)) {

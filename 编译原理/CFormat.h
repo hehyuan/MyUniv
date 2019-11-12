@@ -12,10 +12,21 @@ const char* space = " ";
 static int blocks = 0;
 static int signal = 0;
 string lastWord = " ";
+/*
+fwrite << endl;	//putLine
+
+		//putMargin
+		int temp = blocks;
+		if (signal < 0)
+			temp += signal;
+		while ((temp--) > 0)// 输出margin,按照嵌套的层数来执行
+			fwrite << margin;
+		blocks += signal;
+		signal = 0;
+*/
 void putLineAndMargin(ostream& fwrite) {
 	fwrite << endl;	//putLine
-
-	//putMargin
+		//putMargin
 	int temp = blocks;
 	if (signal < 0)
 		temp += signal;

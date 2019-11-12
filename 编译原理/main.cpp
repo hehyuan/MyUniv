@@ -13,12 +13,13 @@ int main()
 	string dir;
 	src = "test1.c";
 	dir = "output1.c";
-	prettyCode(src, dir);
-	//fread.open("test1.c", ios::in);
-	//program(fread);
+	//prettyCode(src, dir);
+	fread.open("test1.c", ios::in);
+	program(fread);
 	/*while(!fread.eof()){
 		getword(fread);
-	}*/
-	//fread.close();
+		cout << row << endl;
+	}
+	fread.close();*/
 }
 
