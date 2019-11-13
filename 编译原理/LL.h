@@ -17,6 +17,7 @@ enum errorType {
 	assumeError,
 	ifError,
 	whileError,
+	otherError,
 };
 string errorString[] = {
 	"变量说明错误,应该是int型",
@@ -26,6 +27,7 @@ string errorString[] = {
 	"不是正确的赋值语句!",
 	"缺少else!",
 	"缺少do!",
+	"多加了;!"//otherError
 };
 void error() {	
 	cout << "Error!" << endl;
@@ -384,6 +386,9 @@ inline void conditionSentence(ifstream& fread)
 					getword(fread);
 					sentence1(fread);
 					cout << "归约到<条件语句>" << endl;
+				}
+				else if (word == ";") { 
+					error(errorString[otherError]);
 				}
 				else error(errorString[ifError]);
 			}

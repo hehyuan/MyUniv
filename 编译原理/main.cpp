@@ -21,5 +21,6 @@ int main()
 		cout << row << endl;
 	}
 	fread.close();*/
+
 }
 

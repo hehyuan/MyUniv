@@ -1,7 +1,7 @@
 main ( ) 
 {
     int a,b,c;
-    b=1;
-    a=1;
-    a=1
+   while(a<1)
+   do 
+   {a=a+1;a=a}
 }
