@@ -3,6 +3,7 @@
 #define LL_H
 #include"GetWord.h"
 #include<string>
+#include<vector>
 using namespace std;
 /*
 	用e来代表空字符/epsion
@@ -18,6 +19,7 @@ enum errorType {
 	ifError,
 	whileError,
 	otherError,
+	identifiError,
 };
 string errorString[] = {
 	"变量说明错误,应该是int型",
@@ -27,13 +29,21 @@ string errorString[] = {
 	"不是正确的赋值语句!",
 	"缺少else!",
 	"缺少do!",
-	"多加了;!"//otherError
+	"多加了;!",//otherError
+	"未定义的标识符"
 };
+vector<identsheetTemplate> idSheet;
+bool canDefineId = false;
+bool hasError = false;
+long long int addnow = 0x000;
+long long int countId = 0;
 void error() {	
+	hasError = true;
 	cout << "Error!" << endl;
 	cout << nowline << "^" << word << "\t At row: " << row << endl;
 }
 void error(string e) {
+	hasError = true;
 	cout << "Error:" << e << endl;
 	cout << nowline << "^" << word << "\t At row: " << row << endl;
 }
@@ -125,7 +135,9 @@ inline void program(ifstream& fread) {
 
 inline void mainFunction(ifstream& fread) {
 	cout << "开始规约<主函数>" << endl;
+	canDefineId = true;
 	variableDiscribePart(fread);
+	canDefineId = false;
 	if (word == ";") {
 		getword(fread);
 		sentencePart(fread);
@@ -139,7 +151,15 @@ inline void mainFunction(ifstream& fread) {
 inline void variableDiscribePart(ifstream& fread) {
 	cout << "开始规约<变量说明部分>" << endl;
 	variableDiscribe(fread);
-	identSheet(fread);
+	if (hasError != true) {
+		identSheet(fread);
+	}
+	else {//尝试从错误中恢复，舍弃掉其他部分
+		while (word != ";" && word != "}" && !fread.eof()) {
+			getword(fread);
+		}
+		hasError = false;//最后记得把标志恢复，便于后续的查错
+	}
 	cout << "规约到<变量说明部分>" << endl;
 }
 
@@ -174,6 +194,19 @@ inline void identity(ifstream& fread) {
 	cout << "开始规约<标识符>" << endl;
 	//当前读取的单词的类型为标识符
 	if (sym == ident) {
+		if (canDefineId == true) {//可以定义标识符
+			identsheetTemplate temp(word,countId++, addnow+=2);
+			idSheet.push_back(temp);
+		}
+		else {//此时不能定义标识符
+			bool flag = 0;
+			for (int i = 0; i < idSheet.size(); i++) {
+				if (idSheet[i].name == word)
+					flag = 1;
+			}
+			if(flag!=1)
+				error(errorString[identifiError]);
+		}
 		getword(fread);
 		cout << "归约到<标识符>" << endl;
 		return;
@@ -220,6 +253,12 @@ inline void sentence(ifstream& fread)
 		loopSentence(fread);
 		cout << "归约到<语句>" << endl;
 	}
+	if (hasError == true) {
+		while (word != ";" && word != "}" && !fread.eof()) {//尝试排查错误，直到遇见分号，赋值语句结束或者遇到右括号
+			getword(fread);
+		}
+		hasError = false;
+	}
 	else error();
 }
 
@@ -232,7 +271,9 @@ inline void assumeSentence(ifstream& fread)
 		expression(fread);
 		cout << "归约到<赋值语句>" << endl;
 	}
-	else error(errorString[assumeError]);
+	else { 
+		error(errorString[assumeError]); 
+	}
 }
 
 inline void condition(ifstream& fread)
@@ -335,7 +376,7 @@ inline void factor(ifstream& fread)
 		}
 		else error(errorString[kuohaoError]);
 	}
-	else error(errorString[kuohaoError]);
+	else error(errorString[assumeError]);
 }
 
 inline void constVal(ifstream& fread)
@@ -420,6 +461,7 @@ inline void loopSentence(ifstream& fread)
 		else error(errorString[kuohaoError]);
 	}
 	else error(errorString[keyWordError]);
+	
 }
 
 

@@ -48,6 +48,8 @@ public:
 	int number;
 	string type;
 	int adress;
+	identsheetTemplate(string name, int number, int adress) :name(name), number(number), type("int"), adress(adress) {};
+	identsheetTemplate() {};
 
 };
 identsheetTemplate identsheet[100];//标识符的表，用于存放标识符的编号,类型和地址
@@ -64,17 +66,21 @@ void output() {
 	int value = -1;
 	//当前的单词为标识符
 	if (sym == ident) {
-		for (int i = 0; i < Num_of_idents; i++) {
+		/*for (int i = 0; i < Num_of_idents; i++) {
 			if (word == identsheet[i].name)
 				value = identsheet[i].adress;
-		}
+		}*/
+		value = number;
 	}
 	//当前的单词为数字
 	if (sym == number) {
 		value = stoi(word);
 	}
 	//如果当前的单词为标识符或是数字
-	if (value > 0) {
+	if (value == 0) {
+		cout << right << "[ '" << word << "', " <<"id" << "]" << endl;
+	}
+	else if (value > 0) {
 		cout << right << "[ '" << word << "', " << value << "]" << endl;
 		//cout << right << "[ " << sym << ", " << value << "]" << endl;
 	}

@@ -4,6 +4,7 @@
 #include"LL.h"
 #include"GetWord.h"
 #include"CFormat.h"
+#include"asemble.h"
 using namespace std;
 int main()
 {	
@@ -14,13 +15,17 @@ int main()
 	src = "test1.c";
 	dir = "output1.c";
 	//prettyCode(src, dir);
-	fread.open("test1.c", ios::in);
+	fread.open("mycode.c", ios::in);
 	program(fread);
+	//下面测试汇编指令情况
+	cout << "Test Assemblely code" << endl;
+	cout << "----------------------" << endl;
+	cout << asm_add("a", "b", "y") << asm_sub("a", "b", "y") << asm_add(10, "a", "b")
+		<<asm_div("a","b","y")<< endl;
 	/*while(!fread.eof()){
 		getword(fread);
-		cout << row << endl;
-	}
-	fread.close();*/
+	}*/
+	fread.close();
 
 }
 
