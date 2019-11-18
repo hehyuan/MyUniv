@@ -9,9 +9,13 @@
 using namespace std;
 const char* margin = "    ";
 const char* space = " ";
-static int blocks = 0;
-static int signal = 0;
+static int blocks = 0; //用于设置margin
+static int signal = 0; // 用于考虑缩进的信号
 string lastWord = " ";
+void initCFormat(ifstream &fread) {
+	getword(fread);
+	lastWord = word;
+}
 void putLineAndMargin(ostream& fwrite) {
 	fwrite << endl;	//putLine
 		//putMargin
@@ -23,30 +27,43 @@ void putLineAndMargin(ostream& fwrite) {
 	blocks += signal;
 	signal = 0;
 }
-void oneTurn(ifstream& fread, ofstream& fwrite) {
+void oneTurn(ifstream& fread, ofstream& fwrite) {	
 	getword(fread);
-	if (word == "{" || word == "}") {
-		if (word == "}")signal = -1;
-		if (word == "{")signal = 1;
+	if (lastWord == "{" || lastWord == "}") {
+		if (lastWord == "}")signal = -1;
+		if (lastWord == "{")signal = 1;
 		putLineAndMargin(fwrite);
-		fwrite << word;
-		putLineAndMargin(fwrite);
+		fwrite << lastWord;
+		if (!(lastWord == "}" && word == "}")) {
+			putLineAndMargin(fwrite);
+		}
+		else {
+			blocks += signal;
+			signal = 0;
+		}
 	}
-	else if (word == ";") {
-		fwrite << word;
-		putLineAndMargin(fwrite);
+	else if (lastWord == ";") {
+		fwrite << lastWord;
+		if (!(word == "}")) {
+			putLineAndMargin(fwrite);
+		}
+		else {
+			blocks += signal;
+			signal = 0;
+		}
 	}
-	else if (word == "int" || word == "if" || word == "while" || word == "do") {
-		fwrite << word << space;
+	else if (lastWord == "int" || lastWord == "if" || lastWord == "while" || lastWord == "do") {
+		fwrite << lastWord << space;
 	}
 	else {
-		fwrite << word << space;
+		fwrite << lastWord << space;
 	}
 	lastWord = word;
 }
 void prettyCode(string src,string dir) {
 	ifstream fread(src, ios::in);
 	ofstream fwrite(dir, ios::out);
+	initCFormat(fread);
 	while (!fread.eof()) {
 		oneTurn(fread, fwrite);
 	}

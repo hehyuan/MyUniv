@@ -1,11 +1,17 @@
 main ()
-{ int a,b,y,max;
-a=10;  b= ;
-while  (a>0)
-{ b=a+b*a;
-a=a-1
-};
-x=a+b;  y=b+b;
-if  (x>y)  max=x  
-else max=y
+{ 
+    int a,b,c; 
+    if(a>1){
+        if(a>2){
+            if(a>3){
+                a=1;
+            }else{
+                a=1
+            }
+        }else{
+            a=1
+        }
+    }else{
+        a=1
+    }
 }
