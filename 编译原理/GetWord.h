@@ -112,9 +112,9 @@ bool Is_Number(char ch) {
 
 //从待编译的程序中获得一个单词
 void getword(ifstream& fread) {
-	//output();
-	//nowline.append(word);
-	//nowline.append(" ");
+	output();
+	nowline.append(word);
+	nowline.append(" ");
 	word.clear();//先清空当前的单词
 	//如果ch还没赋值,则取一个字符
 	if (!ch) {

@@ -1,17 +1,19 @@
 main ()
 { 
-    int a,b,c; 
-    if(a>1){
-        if(a>2){
-            if(a>3){
-                a=1;
-            }else{
-                a=1
-            }
-        }else{
-            a=1
+    int a,b,c;
+
+    a = 1 ;
+    b = 2 ;
+    c = a + b*(a*b) + a;
+    if(c<=10){
+        if(c<=9){
+            a = 1
         }
-    }else{
-        a=1
+        else{
+            a = 2
+        }
+    }
+    else{
+        a =3
     }
 }
