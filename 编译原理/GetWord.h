@@ -49,7 +49,7 @@ public:
 	string type;
 	int adress;
 	identsheetTemplate(string name, int number, int adress) :name(name), number(number), type("int"), adress(adress) {};
-	identsheetTemplate() {};
+	identsheetTemplate() :name(""), number(0), type(""), adress(0) {};
 
 };
 identsheetTemplate identsheet[100];//标识符的表，用于存放标识符的编号,类型和地址
@@ -112,12 +112,11 @@ bool Is_Number(char ch) {
 
 //从待编译的程序中获得一个单词
 void getword(ifstream& fread) {
-	output();
 	nowline.append(word);
 	nowline.append(" ");
 	word.clear();//先清空当前的单词
 	//如果ch还没赋值,则取一个字符
-	if (!ch) {
+	if (!ch || ch == -1) {
 		ch = fread.get();
 	}
 	//去掉空格 换行

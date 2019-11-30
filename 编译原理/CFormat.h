@@ -35,7 +35,8 @@ void oneTurn(ifstream& fread, ofstream& fwrite) {
 		putLineAndMargin(fwrite);
 		fwrite << lastWord;
 		if (!(lastWord == "}" && word == "}")) {
-			putLineAndMargin(fwrite);
+			if (!(lastWord == "}" && word == ";"))
+				putLineAndMargin(fwrite);
 		}
 		else {
 			blocks += signal;
@@ -62,11 +63,13 @@ void oneTurn(ifstream& fread, ofstream& fwrite) {
 }
 void prettyCode(string src,string dir) {
 	ifstream fread(src, ios::in);
+	fread.seekg(0, ios::beg);
 	ofstream fwrite(dir, ios::out);
 	initCFormat(fread);
 	while (!fread.eof()) {
 		oneTurn(fread, fwrite);
 	}
+	oneTurn(fread, fwrite);
 	fread.close(), fwrite.close();
 }
 #endif // !CFORMAT_H
