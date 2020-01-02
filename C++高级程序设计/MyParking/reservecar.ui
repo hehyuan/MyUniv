@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>reserveCar</class>
+ <widget class="QWidget" name="reserveCar">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>659</width>
+    <height>457</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QWidget" name="gridLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>110</y>
+     <width>361</width>
+     <height>291</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="1">
+     <widget class="QComboBox" name="size">
+      <item>
+       <property name="text">
+        <string>小汽车</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>小卡</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>中卡</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>大卡</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="label_2">
+      <property name="text">
+       <string>可选车位</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QComboBox" name="position"/>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>车型</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>40</y>
+     <width>101</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 14pt &quot;苹方 粗体&quot;;</string>
+   </property>
+   <property name="text">
+    <string>预约车位</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="noBtn">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>420</y>
+     <width>176</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>取消预约</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="yesBtn">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>420</y>
+     <width>177</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>预约</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

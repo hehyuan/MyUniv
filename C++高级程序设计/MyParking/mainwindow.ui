@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="WelcomeLabel">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>40</y>
+      <width>291</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 13pt &quot;仿宋&quot;;
+font: 14pt &quot;苹方 粗体&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Welcome to Parking System</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="gridLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>200</y>
+      <width>581</width>
+      <height>211</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="1">
+      <widget class="QPushButton" name="takeCarBtn">
+       <property name="styleSheet">
+        <string notr="true">font: 12pt &quot;苹方 粗体&quot;;</string>
+       </property>
+       <property name="text">
+        <string>取车</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QPushButton" name="enterParking">
+       <property name="styleSheet">
+        <string notr="true">font: 11pt &quot;苹方 粗体&quot;;</string>
+       </property>
+       <property name="text">
+        <string>泊车</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QPushButton" name="mapBtn">
+       <property name="styleSheet">
+        <string notr="true">font: 12pt &quot;苹方 粗体&quot;;</string>
+       </property>
+       <property name="text">
+        <string>Map</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QPushButton" name="signInBtn">
+       <property name="styleSheet">
+        <string notr="true">font: 12pt &quot;苹方 粗体&quot;;</string>
+       </property>
+       <property name="text">
+        <string>管理员登陆</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>23</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
